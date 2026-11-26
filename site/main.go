@@ -2,11 +2,14 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 )
 
 func h(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello Vortex"))
+	s := "html template"
+	d, _ := template.New("main").Parse("<h1>{{ .}}</h1>")
+	d.Execute(w, s)
 }
 
 func main() {
