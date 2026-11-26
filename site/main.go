@@ -2,8 +2,18 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 )
 
+func h(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hello Vortex"))
+}
+
 func main() {
-	fmt.Println("Site will be here, backend will write on Golang")
+	serv := http.NewServeMux()
+	serv.HandleFunc("/", h)
+	err := http.ListenAndServe(":4000", serv)
+	if (err != nil) {
+		fmt.Println(err)
+	}
 }
