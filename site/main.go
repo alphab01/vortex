@@ -6,9 +6,17 @@ import (
 	"net/http"
 )
 
+type test struct {
+	S1 string
+	S2 string
+}
+
 func h(w http.ResponseWriter, r *http.Request) {
-	s := "html template"
-	d, _ := template.New("main").Parse("<h1>{{ .}}</h1>")
+	s := test{S1: "Hello", S2: "World"}
+	d := template.Must(template.New("main").Parse(`<div>
+		<h1>{{ .S1}}</h1>
+		<p>{{ .S2}}</p>
+	</div>`))
 	d.Execute(w, s)
 }
 
