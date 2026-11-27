@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+var s []experiment
+
 type experiment struct {
 	ID string
 	Lib string
@@ -35,10 +37,6 @@ func h2(w http.ResponseWriter, r *http.Request) {
 }
 
 func h(w http.ResponseWriter, r *http.Request) {
-	var s []experiment
-	s = append(s, experiment{ID: "0", Lib: "iostream", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good", RepLink: "https://github.com"})
-	s = append(s, experiment{ID: "1", Lib: "iostream1", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good", RepLink: "https://github.com"})
-	s = append(s, experiment{ID: "2", Lib: "iostream2", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good", RepLink: "https://github.com"})
 	d := template.Must(template.New("main").Parse(`<head>
 			<style>
 				th, td {
@@ -77,7 +75,7 @@ func h(w http.ResponseWriter, r *http.Request) {
 				<td> {{ .Sim}} </td>
 				<td> {{ .Res}} </td>
 				<td> {{ .RepLink}} </td>
-				<td><a href="/exp$ID"> info </a></td>
+				<td><a href="/exp{{ .ID}}"> info </a></td>
 			</tr>
 			{{end}}
 		</tbody>
@@ -91,6 +89,12 @@ func main() {
 	serv := http.NewServeMux()
 	serv.HandleFunc("/", h)
 	serv.HandleFunc("/info", h2)
+	s = append(s, experiment{ID: "0", Lib: "iostream", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good", RepLink: "https://github.com"})
+	s = append(s, experiment{ID: "1", Lib: "iostream1", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good", RepLink: "https://github.com"})
+	s = append(s, experiment{ID: "2", Lib: "iostream2", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good", RepLink: "https://github.com"})
+	serv.HandleFunc("/exp0", h2)
+	serv.HandleFunc("/exp1", h2)
+	serv.HandleFunc("/exp2", h2)
 	err := http.ListenAndServe(":4000", serv)
 	if (err != nil) {
 		fmt.Println(err)
