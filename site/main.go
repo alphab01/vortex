@@ -25,6 +25,8 @@ type test struct {
 func h(w http.ResponseWriter, r *http.Request) {
 	var s []experiment
 	s = append(s, experiment{Lib: "iostream", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good"})
+	s = append(s, experiment{Lib: "iostream1", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good"})
+	s = append(s, experiment{Lib: "iostream2", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good"})
 	d := template.Must(template.New("main").Parse(`<head>
 			<style>
 				th, td {
@@ -36,10 +38,10 @@ func h(w http.ResponseWriter, r *http.Request) {
 		<p>description</p>
 		<hr>
 		<p>our experiments:</p>
-		<table>
+		<table id="Tab">
 		<thead>
 		<tr>
-		<th>library</th><th>date</th><th>Risc-V GPU type</th><th>description</th><th>GPU commit</th><th>Library commit</th><th>Simulator</th><th>Result</th>
+		<th style="cursor:pointer">library</th><th>date</th><th>Risc-V GPU type</th><th>description</th><th>GPU commit</th><th>Library commit</th><th>Simulator</th><th>Result</th>
 		</tr>
 		</thead>
 		<tbody>
