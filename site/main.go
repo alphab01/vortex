@@ -30,17 +30,23 @@ func h(w http.ResponseWriter, r *http.Request) {
 		<hr>
 		<p>our experiments:</p>
 		<table>
+		<thead>
+		<tr>
+		<th>library</th><th>date</th><th>Risc-V GPU type</th><th>description</th><th>GPU commit</th><th>Library commit</th><th>Simulator</th><th>Result</th>
+		</tr>
+		</thead>
+		<tbody>
 			<tr>
-				<p> {{ .Lib}} </p>
-				<p> {{ .Date}} </p>
-				<p> {{ .Gpu}} </p>
-				<p> {{ .Desc}} </p>
-				<p> {{ .Gpucomm}} </p>
-				<p> {{ .Libcomm}} </p>
-				<p> {{ .Sim}} </p>
-				<p> {{ .Res}} </p>
+				<td> {{ .Lib}} </td>
+				<td> {{ .Date}} </td>
+				<td> {{ .Gpu}} </td>
+				<td> {{ .Desc}} </td>
+				<td> {{ .Gpucomm}} </td>
+				<td> {{ .Libcomm}} </td>
+				<td> {{ .Sim}} </td>
+				<td> {{ .Res}} </td>
 			</tr>
-			<p> bye </p>
+		</tbody>
 		</table>
 </div>`))
 	d.Execute(w, s)
