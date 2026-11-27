@@ -80,6 +80,7 @@ func h(w http.ResponseWriter, r *http.Request) {
 			{{end}}
 		</tbody>
 		</table>
+		<a href="/info">info</a>
 </div>`))
 	d.Execute(w, s)
 }
