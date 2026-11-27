@@ -26,11 +26,17 @@ type test struct {
 	S2 string
 }
 
+func numexp(s string) int {
+	c := 0
+	return c
+}
+
 func h2(w http.ResponseWriter, r *http.Request) {
-	s := ""
+	s := r.URL
 	d := template.Must(template.New("main").Parse(`<div>
 		<hr>
 		<h1>INFO</h1>
+		<p>{{ .}}</p>
 		<hr>
 	</div>`))
 	d.Execute(w, s)
