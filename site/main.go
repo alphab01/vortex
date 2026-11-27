@@ -22,8 +22,16 @@ type test struct {
 	S2 string
 }
 
+type pair struct {
+	AA []test
+	BB experiment
+}
+
 func h(w http.ResponseWriter, r *http.Request) {
-	s := experiment{Lib: "iostream", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good"}
+	//s := experiment{Lib: "iostream", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good"}
+	var s []test
+	s = append(s, test{S1: "s1", S2: "s2"})
+	s = append(s, test{S1: "s3", S2: "s4"})
 	d := template.Must(template.New("main").Parse(`<head>
 			<style>
 				th, td {
@@ -35,6 +43,27 @@ func h(w http.ResponseWriter, r *http.Request) {
 		<p>description</p>
 		<hr>
 		<p>our experiments:</p>
+		<ul>
+		{{range .}}
+		<li><b>{{ .S1}}</b></li>
+		<li><b>{{ .S2}}</b></li>
+		{{end}}
+		</ul>
+</div>`))
+	d.Execute(w, s)
+}
+
+func main() {
+	serv := http.NewServeMux()
+	serv.HandleFunc("/", h)
+	err := http.ListenAndServe(":4000", serv)
+	if (err != nil) {
+		fmt.Println(err)
+	}
+}
+
+
+/*
 		<table>
 		<thead>
 		<tr>
@@ -54,15 +83,4 @@ func h(w http.ResponseWriter, r *http.Request) {
 			</tr>
 		</tbody>
 		</table>
-</div>`))
-	d.Execute(w, s)
-}
-
-func main() {
-	serv := http.NewServeMux()
-	serv.HandleFunc("/", h)
-	err := http.ListenAndServe(":4000", serv)
-	if (err != nil) {
-		fmt.Println(err)
-	}
-}
+*/
