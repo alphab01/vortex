@@ -7,6 +7,7 @@ import (
 )
 
 type experiment struct {
+	ID string
 	Lib string
 	Date string
 	Gpu string
@@ -15,6 +16,7 @@ type experiment struct {
 	Libcomm string
 	Sim string
 	Res string
+	RepLink string
 }
 
 type test struct {
@@ -24,9 +26,9 @@ type test struct {
 
 func h(w http.ResponseWriter, r *http.Request) {
 	var s []experiment
-	s = append(s, experiment{Lib: "iostream", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good"})
-	s = append(s, experiment{Lib: "iostream1", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good"})
-	s = append(s, experiment{Lib: "iostream2", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good"})
+	s = append(s, experiment{ID: "0", Lib: "iostream", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good", RepLink: "https://github.com"})
+	s = append(s, experiment{ID: "1", Lib: "iostream1", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good", RepLink: "https://github.com"})
+	s = append(s, experiment{ID: "2", Lib: "iostream2", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good", RepLink: "https://github.com"})
 	d := template.Must(template.New("main").Parse(`<head>
 			<style>
 				th, td {
@@ -41,17 +43,20 @@ func h(w http.ResponseWriter, r *http.Request) {
 		<table id="Tab">
 		<thead>
 		<tr>
+			<th>ID</th>
 			<th>library</th>
 			<th>date</th><th>Risc-V GPU type</th>
 			<th>description</th><th>GPU commit</th>
 			<th>Library commit</th>
 			<th>Simulator</th>
 			<th>Result</th>
+			<th>Link to repository</th>
 		</tr>
 		</thead>
 		<tbody>
 			{{range .}}
 			<tr>
+				<td> {{ .ID}} </td>
 				<td> {{ .Lib}} </td>
 				<td> {{ .Date}} </td>
 				<td> {{ .Gpu}} </td>
@@ -60,6 +65,7 @@ func h(w http.ResponseWriter, r *http.Request) {
 				<td> {{ .Libcomm}} </td>
 				<td> {{ .Sim}} </td>
 				<td> {{ .Res}} </td>
+				<td> {{ .RepLink}} </td>
 			</tr>
 			{{end}}
 		</tbody>
