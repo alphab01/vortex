@@ -24,6 +24,16 @@ type test struct {
 	S2 string
 }
 
+func h2(w http.ResponseWriter, r *http.Request) {
+	s := ""
+	d := template.Must(template.New("main").Parse(`<div>
+		<hr>
+		<h1>INFO</h1>
+		<hr>
+	</div>`))
+	d.Execute(w, s)
+}
+
 func h(w http.ResponseWriter, r *http.Request) {
 	var s []experiment
 	s = append(s, experiment{ID: "0", Lib: "iostream", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good", RepLink: "https://github.com"})
@@ -77,6 +87,7 @@ func h(w http.ResponseWriter, r *http.Request) {
 func main() {
 	serv := http.NewServeMux()
 	serv.HandleFunc("/", h)
+	serv.HandleFunc("/info", h2)
 	err := http.ListenAndServe(":4000", serv)
 	if (err != nil) {
 		fmt.Println(err)
