@@ -6,6 +6,17 @@ import (
 	"net/http"
 )
 
+type experiment struct {
+	Lib string
+	Date string
+	Gpu string
+	Desc string
+	Gpucomm string
+	Libcomm string
+	Sim string
+	Res string
+}
+
 type test struct {
 	S1 string
 	S2 string
@@ -14,8 +25,9 @@ type test struct {
 func h(w http.ResponseWriter, r *http.Request) {
 	s := test{S1: "Hello", S2: "World"}
 	d := template.Must(template.New("main").Parse(`<div>
-		<h1>{{ .S1}}</h1>
-		<p>{{ .S2}}</p>
+		<h1>SparceLinearAlgebra - Vortex</h1>
+		<p>description</p>
+		<hr>
 </div>`))
 	d.Execute(w, s)
 }
