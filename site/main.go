@@ -61,6 +61,7 @@ func h(w http.ResponseWriter, r *http.Request) {
 			<th>Simulator</th>
 			<th>Result</th>
 			<th>Link to repository</th>
+			<th>Info</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -76,6 +77,7 @@ func h(w http.ResponseWriter, r *http.Request) {
 				<td> {{ .Sim}} </td>
 				<td> {{ .Res}} </td>
 				<td> {{ .RepLink}} </td>
+				<td><a href="/exp$ID"> info </a></td>
 			</tr>
 			{{end}}
 		</tbody>
