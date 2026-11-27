@@ -28,6 +28,11 @@ func h(w http.ResponseWriter, r *http.Request) {
 		<h1>SparceLinearAlgebra - Vortex</h1>
 		<p>description</p>
 		<hr>
+		<p>our experiments</p>
+		<table>
+			<tr><td> hello world </td></tr>
+			<td> bye </td>
+		</table>
 </div>`))
 	d.Execute(w, s)
 }
