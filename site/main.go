@@ -16,7 +16,7 @@ func h(w http.ResponseWriter, r *http.Request) {
 	d := template.Must(template.New("main").Parse(`<div>
 		<h1>{{ .S1}}</h1>
 		<p>{{ .S2}}</p>
-	</div>`))
+</div>`))
 	d.Execute(w, s)
 }
 
