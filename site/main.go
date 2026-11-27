@@ -41,7 +41,12 @@ func h(w http.ResponseWriter, r *http.Request) {
 		<table id="Tab">
 		<thead>
 		<tr>
-		<th style="cursor:pointer">library</th><th>date</th><th>Risc-V GPU type</th><th>description</th><th>GPU commit</th><th>Library commit</th><th>Simulator</th><th>Result</th>
+			<th>library</th>
+			<th>date</th><th>Risc-V GPU type</th>
+			<th>description</th><th>GPU commit</th>
+			<th>Library commit</th>
+			<th>Simulator</th>
+			<th>Result</th>
 		</tr>
 		</thead>
 		<tbody>
