@@ -28,19 +28,19 @@ func h(w http.ResponseWriter, r *http.Request) {
 		<h1>SparceLinearAlgebra - Vortex</h1>
 		<p>description</p>
 		<hr>
-		<p>our experiments</p>
+		<p>our experiments:</p>
 		<table>
 			<tr>
-				<td> {{ .Lib}} </td>
-				<td> {{ .Date}} </td>
-				<td> {{ .Gpu}} </td>
-				<td> {{ .Desc}} </td>
-				<td> {{ .Gpucomm}} </td>
-				<td> {{ .Libcomm}} </td>
-				<td> {{ .Sim}} </td>
-				<td> {{ .Res}} </td>
+				<p> {{ .Lib}} </p>
+				<p> {{ .Date}} </p>
+				<p> {{ .Gpu}} </p>
+				<p> {{ .Desc}} </p>
+				<p> {{ .Gpucomm}} </p>
+				<p> {{ .Libcomm}} </p>
+				<p> {{ .Sim}} </p>
+				<p> {{ .Res}} </p>
 			</tr>
-			<td> bye </td>
+			<p> bye </p>
 		</table>
 </div>`))
 	d.Execute(w, s)
