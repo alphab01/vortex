@@ -23,14 +23,23 @@ type test struct {
 }
 
 func h(w http.ResponseWriter, r *http.Request) {
-	s := test{S1: "Hello", S2: "World"}
+	s := experiment{Lib: "iostream", Date: "27.11.2026", Gpu: "Nvidia GeForce RTX 5090", Desc: "test", Gpucomm: "111", Libcomm: "222", Sim: "testsim", Res: "Good"}
 	d := template.Must(template.New("main").Parse(`<div>
 		<h1>SparceLinearAlgebra - Vortex</h1>
 		<p>description</p>
 		<hr>
 		<p>our experiments</p>
 		<table>
-			<tr><td> hello world </td></tr>
+			<tr>
+				<td> {{ .Lib}} </td>
+				<td> {{ .Date}} </td>
+				<td> {{ .Gpu}} </td>
+				<td> {{ .Desc}} </td>
+				<td> {{ .Gpucomm}} </td>
+				<td> {{ .Libcomm}} </td>
+				<td> {{ .Sim}} </td>
+				<td> {{ .Res}} </td>
+			</tr>
 			<td> bye </td>
 		</table>
 </div>`))
