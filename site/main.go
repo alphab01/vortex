@@ -41,13 +41,20 @@ func numexp(s string) int {
 func h2(w http.ResponseWriter, r *http.Request) {
 	s := r.URL.String()
 	fmt.Println(exps[numexp(s)])
+	anonstr := struct {
+		U string
+		Inf experiment
+	} {
+		U: s,
+		Inf: exps[numexp(s)],
+	}
 	d := template.Must(template.New("main").Parse(`<div>
 		<hr>
 		<h1>INFO</h1>
 		<p>{{ .}}</p>
 		<hr>
 	</div>`))
-	d.Execute(w, s)
+	d.Execute(w, anonstr)
 }
 
 func h(w http.ResponseWriter, r *http.Request) {
