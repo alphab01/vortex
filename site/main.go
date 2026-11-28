@@ -51,7 +51,8 @@ func h2(w http.ResponseWriter, r *http.Request) {
 	d := template.Must(template.New("main").Parse(`<div>
 		<hr>
 		<h1>INFO</h1>
-		<p>{{ .}}</p>
+		<p>{{ .U}}</p>
+		<p>{{ .Inf}}</p>
 		<hr>
 	</div>`))
 	d.Execute(w, anonstr)
